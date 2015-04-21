@@ -80,7 +80,7 @@ sudo make install
 
 ###create tables for data storage
 ```
-env COMPRESSION=NONE HBASE_HOME=path/to/hbase-0.94.X ./src/create_table.sh
+env COMPRESSION=NONE HBASE_HOME=path/to/hbase-0.94.X./src/create_table.sh
 ```
 (first time only)
 
