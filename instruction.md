@@ -80,12 +80,31 @@ sudo make install
 
 ###create tables for data storage
 ```
-env COMPRESSION=NONE HBASE_HOME=path/to/hbase-0.94.X./src/create_table.sh
+env COMPRESSION=NONE HBASE_HOME=path/to/hbase-0.94.X/ ./src/create_table.sh
 ```
 (first time only)
 
 ###start tsd
 ```
-./build/tsdb tsd
+gedit start_tsd.sh &
+
+contents:
+
+#!/bin/bash
+tsdtmp=${TMPDIR-'/tmp'}/tsd   
+# For best performance, make sure
+mkdir -p "$tsdtmp" 
+# your temporary directory uses tmpfs
+./build/tsdb tsd --port=4242 --staticroot=build/staticroot --cachedir="$tsdtmp" --zkquorum=localhost
+
+
+save & quit
 ```
 
+```
+檔案=>opentsdb=>start_tsd.sh=>right click => 權限:讀寫all & 允許檔案作為程式執行
+```
+
+```
+./start_tsd.sh
+```
